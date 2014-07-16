@@ -707,6 +707,7 @@ html, body, .perspective {
 .searchWrapper {
 	width: 540px;
 	margin: 288px auto 0;
+	/*margin: 100px auto 0;*/
 }
 input.searchField {
 	background: transparent;
