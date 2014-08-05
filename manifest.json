@@ -3,10 +3,19 @@
   "description": "Override the new tab page with a blank one",
   "version": "0.2",
   "incognito": "split",
+   "offline_enabled": true,
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
+/*  "background": {
+      "scripts": [
+          "background.js"
+      ]
+  },*/
   "permissions": [
+    "tabs",
+    "<all_urls>", 
+    "file:///*",
     "http://www.google.com/",
     "https://query.yahooapis.com/",
     "https://clients1.google.com"

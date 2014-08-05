@@ -1,5 +1,16 @@
+$(window).load(function(){
+    $('.perspective').animate({
+        opacity:1
+    },300)
+})
 $(document).ready(function () {
-
+    $('.perspective').css({
+        opacity:0
+    })
+    $('.weather .tempImg').html(localStorage.getItem("tempImg"));
+    $('.weather .temp').html(localStorage.getItem("temp"));
+    $('.weather .type').html(localStorage.getItem("wType"));
+    $('ul.forecast').html(localStorage.getItem("sForcast"));
     $.ajax({
         url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%3D2295412&format=json&diagnostics=true&callback=',
         dataType: 'json',
@@ -15,7 +26,17 @@ $(document).ready(function () {
             //$('.weather .type').html(data.query.results.channel.item.description);
             $('.weather .temp').html(celsiusRound);
             $('.weather .tempImg').html("<img alt='"+ wText +"' src='images/plain_weather/flat_white/svg/"+weatherImg+".svg'>");
+
+            localStorage.removeItem("tempImg");
+            localStorage.removeItem("temp");
+            localStorage.removeItem("wType");
+            localStorage.setItem("tempImg", "<img alt='"+ wText +"' src='images/plain_weather/flat_white/svg/"+weatherImg+".svg'>");
+            localStorage.setItem("temp", celsiusRound);
+            localStorage.setItem("wType", wText);
             // $('.weather .tempImg').html("<img alt='"+ wText +"' src='images/plain_weather/light/svg/"+weatherImg+".svg'>");
+
+            $('ul.forecast').empty();
+
             $(data.query.results.channel.item.forecast).each(function (index, forecasts) {
                 console.log(index);
                 var celsiusH = (forecasts.high-32)*5/9;
@@ -26,6 +47,9 @@ $(document).ready(function () {
                 
                 $('ul.forecast').append(itemHtml);
             });
+            var forcast = $('ul.forecast').html();
+            localStorage.removeItem("sForcast");
+            localStorage.setItem("sForcast", forcast);
         },
         error: function () {}
 
@@ -74,5 +98,16 @@ $(document).ready(function () {
             now = now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();
         $('#time').html(now);
     }
+    //m.appView = new m.views.Dashboard();
+
+    $('#app-return').css('opacity','0').fadeTo(500, 1);
+
+    $('.outer-nav a.chrome').click(function(e) {
+        e.preventDefault();
+        var link = $(this).attr('href');
+        chrome.tabs.update({
+            url: link
+        });
+    });
 
   });

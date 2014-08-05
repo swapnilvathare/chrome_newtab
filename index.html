@@ -45,21 +45,23 @@
 							<input type="submit" value="Search" class="search">
 						</div>
 						<div class="column">
-							<p><button id="showMenu">Show Menu</button></p>
+							<!-- <p><button id="showMenu">Show Menu</button></p> -->
+							<!-- <p><button id="showMenu"><span>Menu</span></button></p> -->
 							<!-- <p>Click on this button to see the content being pushed away in 3D to reveal a navigation or other items.</p> -->
 						</div>
 					</div><!-- /main -->
 				</div><!-- wrapper -->
+				<button id="showMenu"><span>Menu</span></button>
 			</div><!-- /container -->
 			<nav class="outer-nav right vertical">
-				<a href="chrome://apps/" class="icon-home">Apps</a>
-				<a href="chrome-extension://" class="icon-home">Apps</a>
-				<a href="#" class="icon-news">News</a>
-				<a href="#" class="icon-image">Images</a>
+				<a href="chrome://apps" class="icon-home history chrome">Apps</a>
+				<a href="chrome://history" class="icon-home chrome">History</a>
+				<a href="chrome://bookmarks" class="icon-news chrome">Bookmarks</a>
+				<a href="chrome://downloads" class="icon-image chrome">Downloads</a>
 				<a href="#" class="icon-upload">Uploads</a>
 				<a href="#" class="icon-star">Favorites</a>
 				<a href="#" class="icon-mail">Messages</a>
-				<a href="#" class="icon-lock">Security</a>
+				<a href="chrome://settings" class="icon-lock chrome">Settings</a>
 			</nav>
 		</div><!-- /perspective -->
 		<script src="js/jquery.min.js"></script>
