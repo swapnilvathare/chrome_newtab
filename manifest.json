@@ -1,5 +1,5 @@
 {
-  "name": "New Tab",
+  "name": "Swap New Tab",
   "description": "Override the new tab page with a blank one",
   "version": "0.2",
   "incognito": "split",
@@ -18,7 +18,7 @@
     "file:///*",
     "http://www.google.com/",
     "https://query.yahooapis.com/",
-    "https://clients1.google.com"
+    "https://clients1.google.com/*"
   ],
   //"content_security_policy": "script-src 'self', 'unsafe-eval', https://clients1.google.com; object-src 'self'",
   "content_security_policy": "script-src 'self' https://clients1.google.com; object-src 'self'",
