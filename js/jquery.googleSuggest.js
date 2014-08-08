@@ -34,7 +34,9 @@ $.fn.googleSuggest = function(opts){
   };
   
   return this.each(function(){
-    $(this).autocomplete(opts,{
+    $(this).autocomplete(
+      opts,{
+      //autoFocus: true,
       select: function( event, ui ) {
         //console.log('got it');
         $('.search').trigger('click');
