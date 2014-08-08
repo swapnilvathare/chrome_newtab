@@ -115,59 +115,6 @@ var chromeNewTab = {
             }
         },
 
-        //Weather
-/*        weather: function(){
-            var currentInfo = chromeNewTab.sections.getCurrentLocation.showPosition.success();
-            console.log(currentInfo)
-            $('.weather .tempImg').html(localStorage.getItem("tempImg"));
-            $('.weather .temp').html(localStorage.getItem("temp"));
-            $('.weather .type').html(localStorage.getItem("wType"));
-            $('ul.forecast').html(localStorage.getItem("sForcast"));
-
-            $.ajax({
-                url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%3D'+currentInfo[1]+'&format=json&diagnostics=true&callback=',
-                dataType: 'json',
-                success: function (data) {
-                    var fahrenheit = data.query.results.channel.item.condition.temp;
-                    var weatherImg = data.query.results.channel.item.condition.code;
-                    var celsius = (fahrenheit-32)*5/9;
-                    var celsiusRound = Math.round( celsius * 1 ) / 1 + "°C";
-                    var wText = data.query.results.channel.item.condition.text
-                    //var wText = data.query.results.channel.item.description
-                    console.log(celsiusRound);
-                    $('.weather .type').html(wText+'<br>'+currentInfo[0]);
-                    //$('.weather .type').html(data.query.results.channel.item.description);
-                    $('.weather .temp').html(celsiusRound);
-                    $('.weather .tempImg').html("<img alt='"+ wText +"' src='images/plain_weather/flat_white/png/"+weatherImg+".png'>");
-
-                    localStorage.removeItem("tempImg");
-                    localStorage.removeItem("temp");
-                    localStorage.removeItem("wType");
-                    localStorage.setItem("tempImg", "<img alt='"+ wText +"' src='images/plain_weather/flat_white/png/"+weatherImg+".png'>");
-                    localStorage.setItem("temp", celsiusRound);
-                    localStorage.setItem("wType", wText+'<br>'+currentInfo[0]);
-                    // $('.weather .tempImg').html("<img alt='"+ wText +"' src='images/plain_weather/light/png/"+weatherImg+".png'>");
-
-                    $('ul.forecast').empty();
-
-                    $(data.query.results.channel.item.forecast).each(function (index, forecasts) {
-                        console.log(index);
-                        var celsiusH = (forecasts.high-32)*5/9;
-                        var celsiusHRound = Math.round( celsiusH * 1 ) / 1 + "°";
-                        var celsiusL = (forecasts.low-32)*5/9;
-                        var celsiusLRound = Math.round( celsiusL * 1 ) / 1 + "°";
-                        var itemHtml = '<li class="condition wc-showers"><span class="name">'+forecasts.day+'</span><span class="tempIcon"><img alt="Mostly Cloudy" src="images/plain_weather/flat_white/png/'+forecasts.code+'.png"></span><span class="temperature"><span class="hi-c">'+celsiusHRound+'</span><span class="lo-c">'+celsiusLRound+'</span></span><div class="clear"></div></li>'
-                        
-                        $('ul.forecast').append(itemHtml);
-                    });
-                    var forcast = $('ul.forecast').html();
-                    localStorage.removeItem("sForcast");
-                    localStorage.setItem("sForcast", forcast);
-                },
-                error: function () {}
-            });
-    
-        },*/
 
         //Search
         googleSearch: function(){
@@ -275,6 +222,6 @@ $(document).ready(function () {
     $('.perspective').css({
         opacity:0
     });
-    $(".searchField").focus();
+    //$(".searchField").focus();
     chromeNewTab.init();
 });
