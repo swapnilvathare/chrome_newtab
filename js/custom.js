@@ -19,13 +19,13 @@ var chromeNewTab = {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(showPosition,showError);
                 } else {
-                    console.log("Geolocation is not supported by this browser.");
+                    //console.log("Geolocation is not supported by this browser.");
                 }
             }
 
             function showPosition(position) {
                 var latlon = position.coords.latitude+","+position.coords.longitude;
-                console.log(latlon);
+                //console.log(latlon);
                 //var getWoeid = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.placefinder%20where%20text%3D%'+latlon+'%22%20and%20gflags%3D%22R%22&format=json&diagnostics=true&callback='
                 $.ajax({
                     url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.placefinder%20where%20text%3D"'+latlon+'%22%20and%20gflags%3D%22R%22&format=json&diagnostics=true&callback=',
@@ -34,9 +34,9 @@ var chromeNewTab = {
                         var currentCity = data.query.results.Result.city;
                         var currentWoeid = data.query.results.Result.woeid;
 
-                        console.log(currentCity+" "+currentWoeid);
+                        //console.log(currentCity+" "+currentWoeid);
                         currentInfo = [currentCity, currentWoeid];
-                        console.log(currentInfo);
+                        //console.log(currentInfo);
                         //chromeNewTab.sections.weather();
                         weather();
                        
@@ -78,7 +78,7 @@ var chromeNewTab = {
                         var celsiusRound = Math.round( celsius * 1 ) / 1 + "°C";
                         var wText = data.query.results.channel.item.condition.text
                         //var wText = data.query.results.channel.item.description
-                        console.log(celsiusRound);
+                        //console.log(celsiusRound);
                         $('.weather .type').html(wText+'<br>'+currentInfo[0]);
                         //$('.weather .type').html(data.query.results.channel.item.description);
                         $('.weather .temp').html(celsiusRound);
@@ -96,7 +96,7 @@ var chromeNewTab = {
 
                         $(data.query.results.channel.item.forecast).each(function (index, forecasts) {
                             if(index<3){
-                                console.log(index);
+                                //console.log(index);
                                 var celsiusH = (forecasts.high-32)*5/9;
                                 var celsiusHRound = Math.round( celsiusH * 1 ) / 1 + "°";
                                 var celsiusL = (forecasts.low-32)*5/9;
@@ -120,7 +120,7 @@ var chromeNewTab = {
         googleSearch: function(){
             $('.search').click(function(){
                 var searchText = $('.searchField').val();
-                console.log(searchText);
+                //console.log(searchText);
                 if(!(searchText="")){
                     var searchText = $('.searchField').val();
                     console.log(searchText);
@@ -133,11 +133,11 @@ var chromeNewTab = {
             $('input.searchField').googleSuggest({ service: 'web' });
             $(document).keypress(function(e) {
                 if(e.which == 13) {
-                    console.log('You pressed enter!');
+                    //console.log('You pressed enter!');
                     if($(".searchField").is(":focus")){
                         if(!(searchText="")){
                             var searchText = $('.searchField').val();
-                            console.log(searchText);
+                            //console.log(searchText);
                             var searchUrl = "http://www.google.com/search?q="+searchText;
                             window.location.href = searchUrl;
                         }
@@ -152,8 +152,12 @@ var chromeNewTab = {
             window.onload = function(){date()}, setInterval(function(){date()}, 1000);
 
             function date() {
-                var now = new Date(),
-                    now = now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();
+                var now = new Date();
+                var hour = now.getHours();
+                hour = ((hour + 11) % 12 + 1);
+                // now = ((now.getHours()<10?'0':'') + now.getHours())+':'+((now.getMinutes()<10?'0':'') + now.getMinutes())+':'+((now.getSeconds()<10?'0':'') + now.getSeconds());
+                // now = ((hour<10?'0':'') + hour)+':'+((now.getMinutes()<10?'0':'') + now.getMinutes())+':'+((now.getSeconds()<10?'0':'') + now.getSeconds());
+                now = ((hour<10?'0':'') + hour)+':'+((now.getMinutes()<10?'0':'') + now.getMinutes());
                 $('#time').html(now);
             }       
         },     
@@ -173,21 +177,27 @@ var chromeNewTab = {
         changeBackground: function(){
             var todayDate = new Date();
             todayDate = todayDate.getDate();
-                console.log('Todays date '+todayDate);
-            if(typeof localStorage.getItem("storedDate") === 'undefined'){
+            //var storedDate = 'swap';
+            //console.log(localStorage.getItem("storedDate"));
+            //localStorage.setItem("storedDate", '5');
+            if((typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
+            // if(localStorage.getItem("storedDate") === null){
+                //console.log('date is undefined');
                 localStorage.setItem("storedDate", todayDate);
+                localStorage.setItem("storedImgNum", 1);
             }else{
-                if((todayDate == localStorage.getItem("storedDate"))){
+                //console.log('I am in else')
+                if(!(todayDate == localStorage.getItem("storedDate"))){
                     imageNumber();
                     function imageNumber(){
                         var newImg = Math.floor((Math.random() * 9) + 1);
-                        console.log(newImg);
+                        //console.log('hi'+newImg);
                         if(newImg == localStorage.getItem("storedImgNum")){
-                            console.log('calling again');
+                            //console.log('calling again');
                             imageNumber();    
                         }else{
 
-                            console.log('hi');
+                            //console.log('hi');
                             $('.container').css({
                                 background:'url(images/'+newImg+'.jpg) center center',
                                 backgroundSize: 'cover'
@@ -199,7 +209,7 @@ var chromeNewTab = {
                     }
                 }else{
 
-                    console.log('else hi');
+                    //console.log('else hi');
                     $('.container').css({
                         background:'url(images/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
                         backgroundSize: 'cover'
@@ -222,6 +232,11 @@ $(document).ready(function () {
     $('.perspective').css({
         opacity:0
     });
+    $( "#showMenu" ).hover(
+      function() {
+        $('.container').addClass('hover');
+      }
+    );
     //$(".searchField").focus();
     chromeNewTab.init();
 });

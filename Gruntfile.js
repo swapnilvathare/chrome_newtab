@@ -6,8 +6,13 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 src: [
-                    'js/libs/jquery-1.10.2.min.js',
-                    'js/script.js'
+                    'js/libs/jquery.min.js',
+                    'js/libs/modernizr.custom.25376.js',
+                    'js/libs/classie.js',
+                    'js/libs/menu.js',
+                    'js/libs/jquery-ui.min.js',
+                    'js/libs/jquery.googleSuggest.js',
+                    'js/custom.js'
                 ],
                 dest: 'js/build/production.js',
                 nonull: true
@@ -21,7 +26,7 @@ module.exports = function(grunt) {
             },
             build: {
                 src: 'js/build/production.js',
-                dest: 'js/build/production.min.js'
+                dest: 'build/js/production.min.js'
             }
         },
 
@@ -30,9 +35,10 @@ module.exports = function(grunt) {
             combine: {
                 files: {
                     'css_min/production.min.css': [
-                        'css/mass_reset.css',
-                        'css/custom.css',
-                        'css/media.css'
+                        'css/normalize.css',
+                        'css/demo.css',
+                        'css/jquery-ui.css',
+                        'css/component.css',
                     ]
                 }
             }

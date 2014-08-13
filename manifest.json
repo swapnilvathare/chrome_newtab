@@ -1,17 +1,17 @@
 {
-  "name": "Swap New Tab",
-  "description": "Override the new tab page with a blank one",
-  "version": "0.2",
+  "name": "New Tab Plus",
+  "description": "Override the new tab page with a background image, weather updates, google search with suggestion and chrome internal links.",
+  "version": "0.1",
   "incognito": "split",
    "offline_enabled": true,
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-/*  "background": {
-      "scripts": [
-          "background.js"
-      ]
-  },*/
+   "icons": {
+      "128": "icon-128.png",
+      "16": "icon-16.png",
+      "48": "icon-48.png"
+   },
   "permissions": [
     "geolocation", 
     "tabs",

@@ -1,0 +1,16 @@
+.DS_Store
+.htaccess
+/app/Config/database.php
+/app/Config/core.php
+/app/webroot/files/*
+/app/tmp
+/nbproject
+.idea
+/.idea
+/app/webroot/img/attached/*
+/app/webroot/img/ckfiles/*
+/app/webroot/img/clients/*
+/app/webroot/img/categories/*
+/app/webroot/img/sliders/*
+/app/webroot/img/domains/*
+node_modules
