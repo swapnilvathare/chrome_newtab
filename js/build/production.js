@@ -420,7 +420,7 @@ var chromeNewTab = {
                 if(!(todayDate == localStorage.getItem("storedDate"))){
                     imageNumber();
                     function imageNumber(){
-                        var newImg = Math.floor((Math.random() * 9) + 1);
+                        var newImg = Math.floor((Math.random() * 20) + 1);
                         //console.log('hi'+newImg);
                         if(newImg == localStorage.getItem("storedImgNum")){
                             //console.log('calling again');
