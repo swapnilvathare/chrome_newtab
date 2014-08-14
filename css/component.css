@@ -731,21 +731,24 @@ body {
 	width: 65px;
 }
 .searchWrapper {
-	width: 540px;
+	width: 542px;
 	/*margin: 288px auto 0;*/
 	margin: 318px auto 0;
 	/*margin: 100px auto 0;*/
+	background: rgba(255,255,255,0.3);
+	border: 1px solid rgba(0,0,0,0.14);
+	border-radius: 6px;
 }
 input.searchField {
-	background: transparent;
+	/*background: transparent;
 	border: none;
 	box-shadow: inset 0 0 4px rgba(0,0,0,0.4),0 1px 0 rgba(255,255,255,0.4);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0,0,0,0.3)), color-stop(1, rgba(0,0,0,0.1)));
 	background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0, rgba(0,0,0,0.1) 100%);
-	background-image: linear-gradient(top, rgba(0,0,0,0.3) 0, rgba(0,0,0,0.1) 100%);
+	background-image: linear-gradient(top, rgba(0,0,0,0.3) 0, rgba(0,0,0,0.1) 100%);*/
 	border-radius: 4px;
 	position: relative;
-	margin: 12px 1px 13px 0;
+	margin: 12px;
 	border-top: 1px solid rgba(0,0,0,0.4);
 	padding: 8px 12px;
 	width: 516px;
@@ -753,7 +756,15 @@ input.searchField {
 	color: #fff;
 	font-weight: bold;
 	text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-	opacity: 0.5;
+	/*opacity: 0.5;*/
+	box-sizing: border-box;
+	height: 50px;
+	padding-top: 10px;
+	background: white !important;
+	border-radius: 2px;
+	color: #333;
+	border: 1px solid transparent;
+	font-size: 18px;
 }
 input.searchField:focus {
 	outline: none;
@@ -770,7 +781,7 @@ input.search {
     position: relative;
     text-indent: -99999px;
     border: none;
-    margin: 18px 0 0 -35px;
+    margin: 11px 0 0 -35px;
 }
 .todayInfo {
 	margin-right: 5px;
