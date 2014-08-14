@@ -180,14 +180,14 @@ var chromeNewTab = {
             //var storedDate = 'swap';
             //console.log(localStorage.getItem("storedDate"));
             //localStorage.setItem("storedDate", '5');
-            if((typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
+            /*if((typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
             // if(localStorage.getItem("storedDate") === null){
                 //console.log('date is undefined');
                 localStorage.setItem("storedDate", todayDate);
                 localStorage.setItem("storedImgNum", 1);
-            }else{
+            }else{*/
                 //console.log('I am in else')
-                if(!(todayDate == localStorage.getItem("storedDate"))){
+                if((!(todayDate == localStorage.getItem("storedDate")))||(typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
                     imageNumber();
                     function imageNumber(){
                         var newImg = Math.floor((Math.random() * 20) + 1);
@@ -215,7 +215,7 @@ var chromeNewTab = {
                         backgroundSize: 'cover'
                     })
                 }
-            }
+            /*}*/
             //if(todayDate == )
             //console.log(storedDate);
 

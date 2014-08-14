@@ -1,7 +1,8 @@
 {
   "name": "New Tab Plus",
+  "short_name": "New Tab Plus",
   "description": "Override the new tab page with a background image, weather updates, google search with suggestion and chrome internal links.",
-  "version": "0.1",
+  "version": "0.3",
   "incognito": "split",
    "offline_enabled": true,
   "chrome_url_overrides": {
@@ -16,13 +17,10 @@
     "geolocation", 
     "tabs",
     "<all_urls>", 
-    "file:///*",
     "http://www.google.com/",
     "https://query.yahooapis.com/",
     "https://clients1.google.com/*"
   ],
-  //"content_security_policy": "script-src 'self', 'unsafe-eval', https://clients1.google.com; object-src 'self'",
   "content_security_policy": "script-src 'self' https://clients1.google.com; object-src 'self'",
-  
   "manifest_version": 2
 }
