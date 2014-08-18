@@ -149,17 +149,49 @@ var chromeNewTab = {
 
         //Time
         currentTime: function(){
-            window.onload = function(){date()}, setInterval(function(){date()}, 1000);
+            window.onload = function(){date()}/*, setInterval(function(){date()}, 1000);*/
 
             function date() {
                 var now = new Date();
                 var hour = now.getHours();
+                var ampm = hour >= 12 ? 'pm' : 'am';
                 hour = ((hour + 11) % 12 + 1);
                 // now = ((now.getHours()<10?'0':'') + now.getHours())+':'+((now.getMinutes()<10?'0':'') + now.getMinutes())+':'+((now.getSeconds()<10?'0':'') + now.getSeconds());
                 // now = ((hour<10?'0':'') + hour)+':'+((now.getMinutes()<10?'0':'') + now.getMinutes())+':'+((now.getSeconds()<10?'0':'') + now.getSeconds());
-                now = ((hour<10?'0':'') + hour)+':'+((now.getMinutes()<10?'0':'') + now.getMinutes());
-                $('#time').html(now);
-            }       
+                time = ((hour<10?'0':'') + hour)+':'+((now.getMinutes()<10?'0':'') + now.getMinutes()+'<sup>'+ampm+'</sup>');
+
+                
+                $('#dateTime .time').html(time);
+
+                //var d = new Date();
+                var weekday = new Array(7);
+                weekday[0] = "Sunday";
+                weekday[1] = "Monday";
+                weekday[2] = "Tuesday";
+                weekday[3] = "Wednesday";
+                weekday[4] = "Thursday";
+                weekday[5] = "Friday";
+                weekday[6] = "Saturday";
+                var day = weekday[now.getDay()];
+
+                var month = new Array();
+                month[0] = "January";
+                month[1] = "February";
+                month[2] = "March";
+                month[3] = "April";
+                month[4] = "May";
+                month[5] = "June";
+                month[6] = "July";
+                month[7] = "August";
+                month[8] = "September";
+                month[9] = "October";
+                month[10] = "November";
+                month[11] = "December";
+                var month = month[now.getMonth()];
+                var date = now.getDate();
+                //console.log(day+" "+month);
+                $('#dateTime .date').html('<span>'+day+", "+date+" "+month+"</span>");
+            }  
         },     
 
         //Menu
