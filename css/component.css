@@ -176,15 +176,14 @@ body {
 	backface-visibility: hidden;
 }
 
-.icon-news::before { content: "\e600" }
-/*.icon-news::before { content: "\e608" }*/
+/*.icon-news::before { content: "\e600" }
 .icon-home::before { content: "\e601" }
 .icon-image::before { content: "\e602" }
 .icon-upload::before { content: "\e603" }
 .icon-star::before { content: "\e604" }
 .icon-mail::before { content: "\e605" }
 .icon-lock::before { content: "\e606" }
-.icon-chart-pie::before { content: "\e607" }
+.icon-chart-pie::before { content: "\e607" }*/
 
 /* Individual Effects */
 
@@ -817,7 +816,8 @@ ul.forecast .temperature span {
 	padding-right: 5px;
 }
 ul.forecast li .name {
-	width: 50px;
+	/*width: 50px;*/
+	width: 35px;
 	padding-right: 5px;
 }
 ul.forecast li .tempIcon {
@@ -865,6 +865,30 @@ ul.forecast li .tempIcon img {
 
 *::-webkit-selection {
     background:transparent;
+}
+.outer-nav a::before{
+	height: 25px;
+	width: 25px;
+	content: "";
+	background-size: 25px 25px;
+	display: block;
+	float: left;
+	margin-top: 6px;
+}
+.icon-apps::before {
+	background: url(../images/apps.svg);
+}
+.icon-history::before {
+	background: url(../images/history.svg);
+}
+.icon-bookmarks::before {
+	background: url(../images/bookmarks.svg);
+}
+.icon-downloads::before {
+	background: url(../images/downloads.svg);
+}
+.icon-settings::before {
+	background: url(../images/settings.svg);
 }
 /*.yom-app.yom-weather-forecast {
 -webkit-box-sizing: border-box;
