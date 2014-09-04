@@ -19,8 +19,8 @@
     "<all_urls>", 
     "http://www.google.com/",
     "https://query.yahooapis.com/",
-    "https://clients1.google.com/*"
-  ],
+    "https://clients1.google.com/",
+    "http://clients1.google.com/"  ],
   "content_security_policy": "script-src 'self' https://clients1.google.com; object-src 'self'",
   "manifest_version": 2
 }

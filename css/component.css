@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
 	font-family: 'typicons';
 	src:url('../fonts/typicons/typicons.eot');
 	src:url('../fonts/typicons/typicons.eot?#iefix') format('embedded-opentype'),
@@ -7,6 +7,27 @@
 		url('../fonts/typicons/typicons.svg#typicons') format('svg');
 	font-weight: normal;
 	font-style: normal;
+}*/
+@font-face {
+    font-family: 'latoregular';
+    src: url('../fonts/lato-regular-webfont.eot');
+    src: url('../fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/lato-regular-webfont.woff') format('woff'),
+         url('../fonts/lato-regular-webfont.ttf') format('truetype'),
+         url('../fonts/lato-regular-webfont.svg#latoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('../fonts/OpenSans-Regular-webfont.eot');
+    src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 /*@font-face {
@@ -828,6 +849,7 @@ ul.forecast li .tempIcon img {
 	width: 20px;
 }
 #showMenu {
+	border: none;
 	width: 0; 
 	height: 0; 
 	border-top: 60px solid transparent;
@@ -844,6 +866,11 @@ ul.forecast li .tempIcon img {
 	overflow: visible;
 	opacity: 0.4;
 	transition: opacity .4s;
+	font-family: Calibri,'open_sansregular', Arial, sans-serif;
+	font-size: 13px;
+	text-transform: uppercase;
+	cursor: pointer;
+	display: inline-block;
 }
 #showMenu:hover {
 	opacity: 1;

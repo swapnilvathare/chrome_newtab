@@ -230,6 +230,7 @@ $.fn.googleSuggest = function(opts){
 
 var chromeNewTab = {
     init:function(){
+        //this.sections.latoFont();
         this.sections.getCurrentWeather();
         //this.sections.weather();
         this.sections.googleSearch();
@@ -239,7 +240,23 @@ var chromeNewTab = {
 
     },
 
+
     sections: {
+        //font
+/*        latoFont: function(){
+            WebFontConfig = {
+                google: { families: [ 'Lato::latin' ] }
+              };
+              (function() {
+                var wf = document.createElement('script');
+                wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+                wf.type = 'text/javascript';
+                wf.async = 'true';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(wf, s);
+              })(); 
+          },*/
 
         //Weather
         getCurrentWeather: function(){
@@ -379,7 +396,7 @@ var chromeNewTab = {
 
         //Time
         currentTime: function(){
-            window.onload = function(){date()}/*, setInterval(function(){date()}, 1000);*/
+            window.onload = function(){date()}, setInterval(function(){date()}, 30000);
 
             function date() {
                 var now = new Date();
@@ -421,6 +438,9 @@ var chromeNewTab = {
                 var date = now.getDate();
                 //console.log(day+" "+month);
                 $('#dateTime .date').html('<span>'+day+", "+date+" "+month+"</span>");
+                var dateTimeWidth = $('#dateTime').width()/2;
+                console.log(dateTimeWidth);
+                $('#dateTime').css({'margin-left': -dateTimeWidth})
             }  
         },     
 
