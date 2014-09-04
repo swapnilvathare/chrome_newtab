@@ -16,10 +16,28 @@ body {
 	background: #ddd;
 	color: #5a5350;
 	font-weight: 300;
-	font-family: 'Lato', Calibri, Arial, sans-serif;
+	/*font-family: 'Lato', Calibri,'open_sansregular', Arial, sans-serif;*/
+	font-family: Calibri,'open_sansregular', Arial, sans-serif;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
+/*button {
+	font-family: Calibri,'open_sansregular', Arial, sans-serif;
+	border: none;
+	padding: 0.6em 1.2em;
+	background: #a9a9a9;
+	color: #fff;
+	font-size: 1em;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	cursor: pointer;
+	display: inline-block;
+	margin: 10px;
+	border-radius: 2px;
+	font-weight: 400;
+	outline: none;
+}*/
+
 
 a {
 	text-decoration: none;
@@ -43,7 +61,7 @@ a:hover, a:focus {
 	clear: both;
 }
 
-.codrops-header,
+/*.codrops-header,
 .codrops-top {
 	font-family: 'Lato', Arial, sans-serif;
 }
@@ -67,8 +85,6 @@ a:hover, a:focus {
 	font-size: 60%;
 	color: #aca89a;
 }
-
-/* To Navigation Style */
 .codrops-top {
 	width: 100%;
 	text-transform: uppercase;
@@ -117,26 +133,12 @@ a:hover, a:focus {
 
 .codrops-icon-prev:before {
 	content: "\e004";
-}
+}*/
 
-.main {
+/*.main {
 	max-width: 69em;
 	margin: 0 auto;
 }
-
-/*.column {
-	float: left;
-	width: 50%;
-	padding: 0 2em;
-	min-height: 300px;
-	position: relative;
-	text-align: right;
-}*/
-
-/*.column:nth-child(2) {
-	box-shadow: -1px 0 0 rgba(0,0,0,0.1);
-	text-align: left;
-}*/
 
 .column p {
 	font-weight: 300;
@@ -232,4 +234,4 @@ button:active {
 		display: none;
 	}
 
-}
+}*/
