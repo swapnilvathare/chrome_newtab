@@ -871,7 +871,13 @@ ul.forecast li .tempIcon img {
 	text-transform: uppercase;
 	cursor: pointer;
 	display: inline-block;
+	outline: none;
 }
+button:hover,
+button:active {
+	background: #e86a32;
+}
+
 #showMenu:hover {
 	opacity: 1;
 }
