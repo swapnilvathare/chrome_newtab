@@ -87,6 +87,7 @@ var chromeNewTab = {
 
                 $.ajax({
                     url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%3D'+currentInfo[1]+'&format=json&diagnostics=true&callback=',
+                    //https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%3D29220291&format=json&diagnostics=true&callback=
                     dataType: 'json',
                     success: function (data) {
                         var fahrenheit = data.query.results.channel.item.condition.temp;
@@ -166,7 +167,7 @@ var chromeNewTab = {
 
         //Time
         currentTime: function(){
-            window.onload = function(){date()}, setInterval(function(){date()}, 30000);
+            window.onload = function(){date()}, setInterval(function(){date()}, 1000);
 
             function date() {
                 var now = new Date();
@@ -209,7 +210,7 @@ var chromeNewTab = {
                 //console.log(day+" "+month);
                 $('#dateTime .date').html('<span>'+day+", "+date+" "+month+"</span>");
                 var dateTimeWidth = $('#dateTime').width()/2;
-                console.log(dateTimeWidth);
+                //console.log(dateTimeWidth);
                 $('#dateTime').css({'margin-left': -dateTimeWidth})
             }  
         },     
@@ -240,32 +241,67 @@ var chromeNewTab = {
             }else{*/
                 //console.log('I am in else')
                 if((!(todayDate == localStorage.getItem("storedDate")))||(typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
-                    imageNumber();
-                    function imageNumber(){
-                        var newImg = Math.floor((Math.random() * 20) + 1);
-                        //console.log('hi'+newImg);
-                        if(newImg == localStorage.getItem("storedImgNum")){
-                            //console.log('calling again');
-                            imageNumber();    
-                        }else{
+                    if(todayDate == 9){
+                        //console.log('today is 5');
+                        $('.container').css({
+                            background:'url(images/ganesh.jpg) center center',
+                            backgroundSize: 'cover'
+                        });
+                        $('#dateTime').css({
+                            left: '75%'
+                        });
+                        $('.searchWrapper').css({
+                            position: 'relative',
+                            left: '-258px',
+                            marginLeft: '75%'
+                        });
+                        localStorage.setItem("storedDate", todayDate);
+                        //localStorage.setItem("storedImgNum", newImg);
+                    }else{
+                        imageNumber();
+                        function imageNumber(){
+                            var newImg = Math.floor((Math.random() * 28) + 1);
+                            //console.log('hi'+newImg);
+                            if(newImg == localStorage.getItem("storedImgNum")){
+                                //console.log('calling again');
+                                imageNumber();    
+                            }else{
 
-                            //console.log('hi');
-                            $('.container').css({
-                                background:'url(images/'+newImg+'.jpg) center center',
-                                backgroundSize: 'cover'
-                            });
-                            localStorage.setItem("storedDate", todayDate);
-                            localStorage.setItem("storedImgNum", newImg);
+                                //console.log('hi');
+                                $('.container').css({
+                                    background:'url(images/'+newImg+'.jpg) center center',
+                                    backgroundSize: 'cover'
+                                });
+                                localStorage.setItem("storedDate", todayDate);
+                                localStorage.setItem("storedImgNum", newImg);
+                            }
+
                         }
-
                     }
                 }else{
 
                     //console.log('else hi');
-                    $('.container').css({
-                        background:'url(images/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
-                        backgroundSize: 'cover'
-                    })
+                    if(todayDate == 9){
+                        //console.log('today is 5 again');
+                        $('.container').css({
+                            background:'url(images/ganesh.jpg) center center',
+                            backgroundSize: 'cover'
+                        });
+                        $('#dateTime').css({
+                            left: '75%'
+                        });
+                        $('.searchWrapper').css({
+                            position: 'relative',
+                            left: '-258px',
+                            marginLeft: '75%'
+                        });
+                        //localStorage.setItem("storedImgNum", newImg);
+                    }else{
+                        $('.container').css({
+                            background:'url(images/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
+                            backgroundSize: 'cover'
+                        })
+                    }   
                 }
             /*}*/
             //if(todayDate == )
