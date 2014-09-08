@@ -469,9 +469,10 @@ var chromeNewTab = {
                 localStorage.setItem("storedDate", todayDate);
                 localStorage.setItem("storedImgNum", 1);
             }else{*/
-                //console.log('I am in else')
+                console.log('I am in else')
                 if((!(todayDate == localStorage.getItem("storedDate")))||(typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
-                    if(todayDate == 9){
+                    if(todayDate == 8){
+
                         //console.log('today is 5');
                         $('.container').css({
                             background:'url(images/ganesh.jpg) center center',
@@ -511,7 +512,7 @@ var chromeNewTab = {
                 }else{
 
                     //console.log('else hi');
-                    if(todayDate == 9){
+                    if(todayDate == 8){
                         //console.log('today is 5 again');
                         $('.container').css({
                             background:'url(images/ganesh.jpg) center center',
