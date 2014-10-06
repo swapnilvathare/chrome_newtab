@@ -133,7 +133,6 @@ var chromeNewTab = {
             }
         },
 
-
         //Search
         googleSearch: function(){
             $('.search').click(function(){
@@ -230,79 +229,32 @@ var chromeNewTab = {
         changeBackground: function(){
             var todayDate = new Date();
             todayDate = todayDate.getDate();
-            //var storedDate = 'swap';
-            //console.log(localStorage.getItem("storedDate"));
-            //localStorage.setItem("storedDate", '5');
-            /*if((typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
-            // if(localStorage.getItem("storedDate") === null){
-                //console.log('date is undefined');
-                localStorage.setItem("storedDate", todayDate);
-                localStorage.setItem("storedImgNum", 1);
-            }else{*/
-                console.log('I am in else')
                 if((!(todayDate == localStorage.getItem("storedDate")))||(typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
-                    if(todayDate == 8){
+                    
+                    imageNumber();
+                    function imageNumber(){
+                        var newImg = Math.floor((Math.random() * 28) + 1);
+                        //console.log('hi'+newImg);
+                        if(newImg == localStorage.getItem("storedImgNum")){
+                            //console.log('calling again');
+                            imageNumber();    
+                        }else{
 
-                        //console.log('today is 5');
-                        $('.container').css({
-                            background:'url(images/ganesh.jpg) center center',
-                            backgroundSize: 'cover'
-                        });
-                        $('#dateTime').css({
-                            left: '75%'
-                        });
-                        $('.searchWrapper').css({
-                            position: 'relative',
-                            left: '-258px',
-                            marginLeft: '75%'
-                        });
-                        localStorage.setItem("storedDate", todayDate);
-                        //localStorage.setItem("storedImgNum", newImg);
-                    }else{
-                        imageNumber();
-                        function imageNumber(){
-                            var newImg = Math.floor((Math.random() * 28) + 1);
-                            //console.log('hi'+newImg);
-                            if(newImg == localStorage.getItem("storedImgNum")){
-                                //console.log('calling again');
-                                imageNumber();    
-                            }else{
-
-                                //console.log('hi');
-                                $('.container').css({
-                                    background:'url(images/'+newImg+'.jpg) center center',
-                                    backgroundSize: 'cover'
-                                });
-                                localStorage.setItem("storedDate", todayDate);
-                                localStorage.setItem("storedImgNum", newImg);
-                            }
-
+                            //console.log('hi');
+                            $('.container').css({
+                                background:'url(images/'+newImg+'.jpg) center center',
+                                backgroundSize: 'cover'
+                            });
+                            localStorage.setItem("storedDate", todayDate);
+                            localStorage.setItem("storedImgNum", newImg);
                         }
+
                     }
                 }else{
-
-                    //console.log('else hi');
-                    if(todayDate == 8){
-                        //console.log('today is 5 again');
-                        $('.container').css({
-                            background:'url(images/ganesh.jpg) center center',
-                            backgroundSize: 'cover'
-                        });
-                        $('#dateTime').css({
-                            left: '75%'
-                        });
-                        $('.searchWrapper').css({
-                            position: 'relative',
-                            left: '-258px',
-                            marginLeft: '75%'
-                        });
-                        //localStorage.setItem("storedImgNum", newImg);
-                    }else{
-                        $('.container').css({
-                            background:'url(images/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
-                            backgroundSize: 'cover'
-                        })
-                    }   
+                    $('.container').css({
+                        background:'url(images/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
+                        backgroundSize: 'cover'
+                    })
                 }
             /*}*/
             //if(todayDate == )
