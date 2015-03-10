@@ -270,6 +270,39 @@ $(window).load(function(){
     },300)
 })
 $(document).ready(function () {
+
+    $.get('http://static.cricinfo.com/rss/livescores.xml', function(d){
+        //$('body').prepend('<h1> Recommended Web Development Books </h1>');
+        //$('body').prepend('<dl />');
+        //alert('hi');
+        $(d).find('item').each(function(){
+ 
+            var $book = $(this); 
+            //var title = $book.attr("title");
+            //var india = title.match(/india/g);
+            var description = $book.find('description').text();
+
+            //var india = description.match(/india/g);
+            //var imageurl = $book.attr('imageurl');
+            if(!(description.indexOf('India') === -1))
+            {
+              
+                //var html = '<dt>  </dt>';
+                //html += '<dd> <span class="loadingPic" alt="Loading" />';
+                //html += '<p class="title">' + title + '</p>';
+                var score = '<div class="score"> ' + description + '</div>' ;
+                //html += '</dd>';
+     
+                $('#perspective .container').prepend($(score));
+                 
+                //$('.loadingPic').fadeOut(1400);
+            }
+            //console.log(india);
+        });
+    });
+
+
+
     $('.perspective').css({
         opacity:0
     });
