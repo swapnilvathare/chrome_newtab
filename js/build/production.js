@@ -237,6 +237,7 @@ var chromeNewTab = {
         this.sections.currentTime();
         this.sections.mainMenu();
         this.sections.changeBackground();
+        this.sections.weatherToggle();
 
     },
 
@@ -262,6 +263,7 @@ var chromeNewTab = {
         getCurrentWeather: function(){
             getLocation();
             var currentInfo;
+            var currentCountry;
             function getLocation() {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(showPosition,showError);
@@ -279,6 +281,7 @@ var chromeNewTab = {
                     dataType: 'json',
                     success: function (data) {
                         var currentCity = data.query.results.Result.city;
+                        currentCountry = data.query.results.Result.country;
                         var currentWoeid = data.query.results.Result.woeid;
 
                         //console.log(currentCity+" "+currentWoeid);
@@ -286,6 +289,10 @@ var chromeNewTab = {
                         //console.log(currentInfo);
                         //chromeNewTab.sections.weather();
                         weather();
+                        console.log('country '+ currentCountry);
+                        if(currentCountry == 'India'){
+                            cricketScore();
+                        }
                        
                     },
                     error: function () {}
@@ -324,12 +331,14 @@ var chromeNewTab = {
                         var weatherImg = data.query.results.channel.item.condition.code;
                         var celsius = (fahrenheit-32)*5/9;
                         var celsiusRound = Math.round( celsius * 1 ) / 1 + "°C";
+                        var fahrenheitRound = fahrenheit + "°F";
                         var wText = data.query.results.channel.item.condition.text
                         //var wText = data.query.results.channel.item.description
                         //console.log(celsiusRound);
                         $('.weather .type').html(wText+'<br>'+currentInfo[0]);
                         //$('.weather .type').html(data.query.results.channel.item.description);
                         $('.weather .temp').html(celsiusRound);
+                        $('.weather.fahrenheit .temp').html(fahrenheitRound);
                         $('.weather .tempImg').html("<img alt='"+ wText +"' src='images/plain_weather/flat_white/png/"+weatherImg+".png'>");
 
                         localStorage.removeItem("tempImg");
@@ -344,13 +353,17 @@ var chromeNewTab = {
 
                         $(data.query.results.channel.item.forecast).each(function (index, forecasts) {
                             if(index<3){
-                                //console.log(index);
+                                //console.log(forecasts.high);
                                 var celsiusH = (forecasts.high-32)*5/9;
                                 var celsiusHRound = Math.round( celsiusH * 1 ) / 1 + "°";
+                                var fahrenheitHRound = forecasts.high + "°";
                                 var celsiusL = (forecasts.low-32)*5/9;
                                 var celsiusLRound = Math.round( celsiusL * 1 ) / 1 + "°";
-                                var itemHtml = '<li class="condition wc-showers"><span class="name">'+forecasts.day+'</span><span class="tempIcon"><img alt="Mostly Cloudy" src="images/plain_weather/flat_white/png/'+forecasts.code+'.png"></span><span class="temperature"><span class="hi-c">'+celsiusHRound+'</span><span class="lo-c">'+celsiusLRound+'</span></span><div class="clear"></div></li>'
-                                $('ul.forecast').append(itemHtml);
+                                var fahrenheitLRound = forecasts.low + "°";
+                                var celsiusForecasts = '<li class="condition wc-showers"><span class="name">'+forecasts.day+'</span><span class="tempIcon"><img alt="Mostly Cloudy" src="images/plain_weather/flat_white/png/'+forecasts.code+'.png"></span><span class="temperature"><span class="hi-c">'+celsiusHRound+'</span><span class="lo-c">'+celsiusLRound+'</span></span><div class="clear"></div></li>'
+                                var fahrenheitForecasts = '<li class="condition wc-showers"><span class="name">'+forecasts.day+'</span><span class="tempIcon"><img alt="Mostly Cloudy" src="images/plain_weather/flat_white/png/'+forecasts.code+'.png"></span><span class="temperature"><span class="hi-c">'+fahrenheitHRound+'</span><span class="lo-c">'+fahrenheitLRound+'</span></span><div class="clear"></div></li>'
+                                $('.weather.celsius ul.forecast').append(celsiusForecasts);
+                                $('.weather.fahrenheit ul.forecast').append(fahrenheitForecasts);
                             }
                         });
                         var forcast = $('ul.forecast').html();
@@ -359,8 +372,53 @@ var chromeNewTab = {
                     },
                     error: function () {}
                 });
+                
 
             }
+
+            function cricketScore(){
+                $.get('http://static.cricinfo.com/rss/livescores.xml', function(d){
+                    $(d).find('item').each(function(){
+             
+                        var $book = $(this); 
+                        var description = $book.find('description').text();
+                        if(!(description.indexOf('India') === -1))
+                        {
+                            //var score = '<div class="score"> ' + description + '</div>' ;
+                            $('#perspective .container .score').html(description);
+                            setTimeout(function(){
+                                cricketScore();
+                                console.log('hi');
+                            },2000)
+                        }
+                        //console.log(india);
+                    });
+                });
+            }
+
+        },
+
+        //Weather toggle
+        weatherToggle: function(){
+            if(localStorage.getItem("tempFormat") == 'celsius' || localStorage.getItem("tempFormat") == null){
+                $('.weather.fahrenheit').hide();
+                $('.weather.celsius').show();
+            }else {
+                $('.weather.fahrenheit').show();
+                $('.weather.celsius').hide();
+            }
+
+            $( ".weather" ).dblclick(function() {
+                if($(this).hasClass('celsius')){
+                    $('.weather.fahrenheit').show();
+                    $('.weather.celsius').hide();
+                    localStorage.setItem("tempFormat", 'fahrenheit');
+                }else{
+                    $('.weather.fahrenheit').hide();
+                    $('.weather.celsius').show();
+                    localStorage.setItem("tempFormat", 'celsius');
+                }
+            });
         },
 
         //Search
@@ -463,7 +521,7 @@ var chromeNewTab = {
                     
                     imageNumber();
                     function imageNumber(){
-                        var newImg = Math.floor((Math.random() * 28) + 1);
+                        var newImg = Math.floor((Math.random() * 44) + 1);
                         //console.log('hi'+newImg);
                         if(newImg == localStorage.getItem("storedImgNum")){
                             //console.log('calling again');
@@ -501,35 +559,19 @@ $(window).load(function(){
 })
 $(document).ready(function () {
 
-    $.get('http://static.cricinfo.com/rss/livescores.xml', function(d){
-        //$('body').prepend('<h1> Recommended Web Development Books </h1>');
-        //$('body').prepend('<dl />');
-        //alert('hi');
+/*    $.get('http://static.cricinfo.com/rss/livescores.xml', function(d){
         $(d).find('item').each(function(){
  
             var $book = $(this); 
-            //var title = $book.attr("title");
-            //var india = title.match(/india/g);
             var description = $book.find('description').text();
-
-            //var india = description.match(/india/g);
-            //var imageurl = $book.attr('imageurl');
             if(!(description.indexOf('India') === -1))
             {
-              
-                //var html = '<dt>  </dt>';
-                //html += '<dd> <span class="loadingPic" alt="Loading" />';
-                //html += '<p class="title">' + title + '</p>';
                 var score = '<div class="score"> ' + description + '</div>' ;
-                //html += '</dd>';
-     
                 $('#perspective .container').prepend($(score));
-                 
-                //$('.loadingPic').fadeOut(1400);
             }
             //console.log(india);
         });
-    });
+    });*/
 
 
 
