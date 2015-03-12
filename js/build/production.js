@@ -238,6 +238,7 @@ var chromeNewTab = {
         this.sections.mainMenu();
         this.sections.changeBackground();
         this.sections.weatherToggle();
+        this.sections.inspirationalQuote();
 
     },
 
@@ -298,7 +299,7 @@ var chromeNewTab = {
                     error: function () {}
                 });
             }
-            
+
 
             function showError(error) {
                 switch(error.code) {
@@ -376,27 +377,48 @@ var chromeNewTab = {
                 
 
             }
-
+            var doingStuff = false;
             function cricketScore(){
-                $.get('http://static.cricinfo.com/rss/livescores.xml', function(d){
-                    $(d).find('item').each(function(){
-             
-                        var $book = $(this); 
-                        var description = $book.find('description').text();
-                        if(!(description.indexOf('India') === -1))
-                        {
-                            //var score = '<div class="score"> ' + description + '</div>' ;
-                            $('#perspective .container .score').html(description);
-                            setTimeout(function(){
-                                cricketScore();
-                                console.log('hi');
-                            },2000)
-                        }
-                        //console.log(india);
+                
+                    console.log('hi');
+                    $.get('http://static.cricinfo.com/rss/livescores.xml', function(d){
+                        $(d).find('item').each(function(){
+                 
+                            var $book = $(this); 
+                            var description = $book.find('description').text();
+                            //if(!(description.indexOf('India') === -1)){
+                                $('#perspective .container .score').html(description);
+                                if (!doingStuff) {
+                                    doingStuff = true;
+                                    setInterval(function(){cricketScore()}, 1000);
+                                }
+                                
+                            //}
+                            //console.log(india);
+                        });
                     });
-                });
             }
 
+            /*function updateScore(){
+                setInterval(function(){cricketScore()}, 1000);
+            }*/
+
+        },
+
+        //Inspirational Quote
+        inspirationalQuote: function(){
+            $.get('http://www.quotesdaddy.com/feed/tagged/Inspirational', function(d){
+                $(d).find('item').each(function(){
+         
+                    var $quote = $(this); 
+                    var description = $quote.find('description').text();
+                    //if(!(description.indexOf('India') === -1)){
+                        //var score = '<div class="score"> ' + description + '</div>' ;
+                        $('.quote').html(description);
+                    //}
+                    //console.log(india);
+                });
+            });
         },
 
         //Weather toggle
