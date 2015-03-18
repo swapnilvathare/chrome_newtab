@@ -390,7 +390,7 @@ var chromeNewTab = {
                                 $('#perspective .container .score').html(description);
                                 if (!doingStuff) {
                                     doingStuff = true;
-                                    setInterval(function(){cricketScore()}, 1000);
+                                    setInterval(function(){cricketScore()}, 5000);
                                 }
                                 
                             //}

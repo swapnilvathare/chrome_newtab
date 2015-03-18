@@ -721,8 +721,8 @@ body {
 	position: absolute;
 	/*bottom: 100px;*/
 	/*top:200px;*/
-	/*top:190px;*/
-	top:125px;
+	top:190px;
+	/*top:125px;*/
 	left: 50%;
 	margin-left: -104px;
 	font-size: 90px;
@@ -940,7 +940,8 @@ button:active {
 }
 .quote {
 	position: absolute;
-	top: 270px;
+	/*top: 270px;*/
+	bottom: 20px;
 	left: 50%;
 	width: 100%;
 	text-align: center;
