@@ -264,6 +264,7 @@ var chromeNewTab = {
             getLocation();
             var currentInfo;
             var currentCountry;
+            var scoreAvailable;
             function getLocation() {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(showPosition,showError);
@@ -289,7 +290,7 @@ var chromeNewTab = {
                         //console.log(currentInfo);
                         //chromeNewTab.sections.weather();
                         weather();
-                        console.log('country '+ currentCountry);
+                        //console.log('country '+ currentCountry);
                         if(currentCountry == 'India'){
                             cricketScore();
                         }
@@ -378,22 +379,30 @@ var chromeNewTab = {
             }
 
             function cricketScore(){
+                //console.log('clean');
+                //$('#perspective .container .score').html('');
                 $.get('http://static.cricinfo.com/rss/livescores.xml', function(d){
-                    $(d).find('item').each(function(){
+                    $(d).find('item').each(function(i){
              
                         var $book = $(this); 
-                        var description = $book.find('description').text();
-                        if(!(description.indexOf('India') === -1))
-                        {
+                        var description = '<div>'+ $book.find('description').text() + '</div>';
+                        //var devideTeam = description.split(' v ');
+                        if( !(description.indexOf('Sri Lanka') === -1)|| !(description.indexOf('South Africa') === -1) || !(description.indexOf('Bangladesh') === -1) || !(description.indexOf('India') === -1) || !(description.indexOf('Australia') === -1) || !(description.indexOf('Pakistan') === -1) || !(description.indexOf('New Zealand') === -1) || !(description.indexOf('West Indies') === -1)){
+                            if(description.indexOf('Rest of India') === -1){
                             //var score = '<div class="score"> ' + description + '</div>' ;
-                            $('#perspective .container .score').html(description);
-                            setTimeout(function(){
-                                cricketScore();
-                                console.log('hi');
-                            },2000)
+                                $('#perspective .container .score .score'+ i).html(description);
+                                scoreAvailable = 1;
+                            }
                         }
                         //console.log(india);
                     });
+
+                    if(scoreAvailable === 1){
+                        setTimeout(function(){
+                            cricketScore();
+                            //console.log('hi');
+                        },3000)
+                    }
                 });
             }
 
@@ -429,7 +438,7 @@ var chromeNewTab = {
                 //console.log(searchText);
                 if(!(searchText="")){
                     var searchText = $('.searchField').val();
-                    console.log(searchText);
+                    //console.log(searchText);
                     var searchUrl = "http://www.google.com/search?q="+searchText;
                     // window.location.href = "http://www.google.com/search?q="+searchText;
                     window.location.href = searchUrl;
