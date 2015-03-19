@@ -388,7 +388,7 @@ var chromeNewTab = {
                         var description = '<div>'+ $book.find('description').text() + '</div>';
                         //var devideTeam = description.split(' v ');
                         if( !(description.indexOf('Sri Lanka') === -1)|| !(description.indexOf('South Africa') === -1) || !(description.indexOf('Bangladesh') === -1) || !(description.indexOf('India') === -1) || !(description.indexOf('Australia') === -1) || !(description.indexOf('Pakistan') === -1) || !(description.indexOf('New Zealand') === -1) || !(description.indexOf('West Indies') === -1)){
-                            if(description.indexOf('Rest of India') === -1){
+                            if(description.indexOf('Rest of India') === -1 && description.indexOf('Sri Lanka Army Sports Club') === -1 && description.indexOf('Sri Lanka Ports Authority') === -1){
                             //var score = '<div class="score"> ' + description + '</div>' ;
                                 $('#perspective .container .score .score'+ i).html(description);
                                 scoreAvailable = 1;
