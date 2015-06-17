@@ -182,9 +182,14 @@ var chromeNewTab = {
          
                     var $quote = $(this); 
                     var description = $quote.find('description').text();
+                    var devide = description.split('" -')
+                    var quote = devide[0];
+                    var author = devide[1];
+                    console.log(quote);
+                    console.log(author);
                     //if(!(description.indexOf('India') === -1)){
                         //var score = '<div class="score"> ' + description + '</div>' ;
-                        $('.quote').html(description);
+                        $('.quote').html(quote+'"<br> - '+ author);
                     //}
                     //console.log(india);
                 });
