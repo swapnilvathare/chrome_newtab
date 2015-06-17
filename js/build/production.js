@@ -292,7 +292,7 @@ var chromeNewTab = {
                         weather();
                         //console.log('country '+ currentCountry);
                         if(currentCountry == 'India'){
-                            cricketScore();
+                            //cricketScore();
                         }
                        
                     },
@@ -527,33 +527,36 @@ var chromeNewTab = {
         changeBackground: function(){
             var todayDate = new Date();
             todayDate = todayDate.getDate();
-                if((!(todayDate == localStorage.getItem("storedDate")))||(typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
-                    
-                    imageNumber();
-                    function imageNumber(){
-                        var newImg = Math.floor((Math.random() * 44) + 1);
-                        //console.log('hi'+newImg);
-                        if(newImg == localStorage.getItem("storedImgNum")){
-                            //console.log('calling again');
-                            imageNumber();    
-                        }else{
 
-                            //console.log('hi');
+            $('.container').css({
+                background:'url(https://s3-us-west-2.amazonaws.com/chrometab/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
+                backgroundSize: 'cover'
+            });
+
+            if((!(todayDate == localStorage.getItem("storedDate")))||(typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
+                
+                imageNumber();
+                function imageNumber(){
+                    var newImg = Math.floor((Math.random() * 13) + 1);
+                    //console.log('hi'+newImg);
+                    if(newImg == localStorage.getItem("storedImgNum")){
+                        //console.log('calling again');
+                        imageNumber();    
+                    }else{
+                        $('<img/>').attr('src', 'https://s3-us-west-2.amazonaws.com/chrometab/'+newImg+'.jpg').load(function() {
+                           $(this).remove(); // prevent memory leaks as @benweet suggested
                             $('.container').css({
-                                background:'url(images/'+newImg+'.jpg) center center',
+                                background:'url(https://s3-us-west-2.amazonaws.com/chrometab/'+newImg+'.jpg) center center',
                                 backgroundSize: 'cover'
                             });
-                            localStorage.setItem("storedDate", todayDate);
-                            localStorage.setItem("storedImgNum", newImg);
-                        }
-
+                        });
+                        //console.log('hi');
+                        localStorage.setItem("storedDate", todayDate);
+                        localStorage.setItem("storedImgNum", newImg);
                     }
-                }else{
-                    $('.container').css({
-                        background:'url(images/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
-                        backgroundSize: 'cover'
-                    })
+
                 }
+            }
             /*}*/
             //if(todayDate == )
             //console.log(storedDate);
