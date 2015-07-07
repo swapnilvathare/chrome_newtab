@@ -1,13 +1,14 @@
 var chromeNewTab = {
     init:function(){
+        this.sections.changeBackground();
         //this.sections.latoFont();
+        this.sections.currentTime();
         this.sections.getCurrentWeather();
         //this.sections.weather();
         this.sections.googleSearch();
-        this.sections.currentTime();
         this.sections.mainMenu();
-        this.sections.changeBackground();
         this.sections.weatherToggle();
+        this.sections.inspirationalQuote();
 
     },
 
@@ -69,7 +70,7 @@ var chromeNewTab = {
                     error: function () {}
                 });
             }
-            
+
 
             function showError(error) {
                 switch(error.code) {
@@ -147,7 +148,7 @@ var chromeNewTab = {
                 
 
             }
-
+            var doingStuff = false;
             function cricketScore(){
                 //console.log('clean');
                 //$('#perspective .container .score').html('');
@@ -176,6 +177,31 @@ var chromeNewTab = {
                 });
             }
 
+            /*function updateScore(){
+                setInterval(function(){cricketScore()}, 1000);
+            }*/
+
+        },
+
+        //Inspirational Quote
+        inspirationalQuote: function(){
+            $.get('http://www.quotesdaddy.com/feed/tagged/Inspirational', function(d){
+                $(d).find('item').each(function(){
+         
+                    var $quote = $(this); 
+                    var description = $quote.find('description').text();
+                    var devide = description.split('" -')
+                    var quote = devide[0];
+                    var author = devide[1];
+                    //console.log(quote);
+                    //console.log(author);
+                    //if(!(description.indexOf('India') === -1)){
+                        //var score = '<div class="score"> ' + description + '</div>' ;
+                        $('.quote').html(quote+'"<br> - '+ author);
+                    //}
+                    //console.log(india);
+                });
+            });
         },
 
         //Weather toggle
@@ -298,6 +324,59 @@ var chromeNewTab = {
             var todayDate = new Date();
             todayDate = todayDate.getDate();
 
+            $('.imageWrapper').css({
+                background:'url(images/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
+                '-webkit-filter': 'blur(5px)',
+                backgroundSize: 'cover'
+            });
+
+            if((!(todayDate == localStorage.getItem("storedDate")))||(typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
+                
+                imageNumber();
+                function imageNumber(){
+                    var newImg = Math.floor((Math.random() * 53) + 1);
+                    //console.log('hi'+newImg);
+                    if(newImg == localStorage.getItem("storedImgNum")){
+                        //console.log('calling again');
+                        imageNumber();    
+                    }else{
+                        $('.imageWrapper').css({
+                            background:'url(images/'+newImg+'.jpg) center center',
+                            '-webkit-filter': 'blur(5px)',
+                            backgroundSize: 'cover'
+                        });
+                        /*$('<img/>').attr('src', 'images/'+newImg+'.jpg').load(function() {
+                           $(this).remove(); // prevent memory leaks as @benweet suggested
+                            $('.container').css({
+                                background:'url(images'+newImg+'.jpg) center center',
+                                filter: 'blur(20px)',
+                                backgroundSize: 'cover'
+                            });
+                        });*/
+                        //console.log('hi');
+                        localStorage.setItem("storedDate", todayDate);
+                        localStorage.setItem("storedImgNum", newImg);
+                    }
+
+                }
+            }
+
+            $('.hiddenImg').attr('src', 'https://s3-us-west-2.amazonaws.com/chrometab/'+localStorage.getItem("storedImgNum")+'.jpg').load(function() {
+                $(this).remove(); // prevent memory leaks as @benweet suggested
+                $('.imageWrapper').css({
+                    background:'url(https://s3-us-west-2.amazonaws.com/chrometab/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
+                    backgroundSize: 'cover'
+                });
+                $('.imageWrapper').addClass('animateBlur');
+            });
+
+        }
+
+        //Background
+        /*changeBackground: function(){
+            var todayDate = new Date();
+            todayDate = todayDate.getDate();
+
             $('.container').css({
                 background:'url(https://s3-us-west-2.amazonaws.com/chrometab/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
                 backgroundSize: 'cover'
@@ -327,45 +406,32 @@ var chromeNewTab = {
 
                 }
             }
-            /*}*/
-            //if(todayDate == )
-            //console.log(storedDate);
 
-        }
+        }*/
     }
 }
 
 $(window).load(function(){
     $('.perspective').animate({
         opacity:1
-    },300)
+    },300);
+
+    /*$('.container').css({
+        '-webkit-filter': 'blur(0px)'
+    });*/
 })
 $(document).ready(function () {
 
-/*    $.get('http://static.cricinfo.com/rss/livescores.xml', function(d){
-        $(d).find('item').each(function(){
- 
-            var $book = $(this); 
-            var description = $book.find('description').text();
-            if(!(description.indexOf('India') === -1))
-            {
-                var score = '<div class="score"> ' + description + '</div>' ;
-                $('#perspective .container').prepend($(score));
-            }
-            //console.log(india);
-        });
-    });*/
 
-
-
-    $('.perspective').css({
+    /*$('.perspective').css({
         opacity:0
-    });
+    });*/
+    //$(".searchField").focus();
+    chromeNewTab.init();
+    
     $( "#showMenu" ).hover(
       function() {
         $('.container').addClass('hover');
       }
     );
-    //$(".searchField").focus();
-    chromeNewTab.init();
 });
