@@ -230,6 +230,7 @@ $.fn.googleSuggest = function(opts){
 
 var chromeNewTab = {
     init:function(){
+        this.sections.inspirationalQuote();
         this.sections.changeBackground();
         //this.sections.latoFont();
         this.sections.currentTime();
@@ -238,7 +239,6 @@ var chromeNewTab = {
         this.sections.googleSearch();
         this.sections.mainMenu();
         this.sections.weatherToggle();
-        this.sections.inspirationalQuote();
 
     },
 
@@ -415,6 +415,38 @@ var chromeNewTab = {
 
         //Inspirational Quote
         inspirationalQuote: function(){
+            var todayDate = new Date();
+            todayDate = todayDate.getDate();
+
+            /*$('.imageWrapper').css({
+                background:'url(images/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
+                '-webkit-filter': 'blur(5px)',
+                backgroundSize: 'cover'
+            });*/
+
+            if((!(todayDate == localStorage.getItem("storedDate")))||(typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)||(typeof localStorage.getItem("storedQuote") === 'undefined')||(localStorage.getItem("storedQuote") === null)){
+                
+                newQuote();
+                function newQuote(){
+                    $.getJSON('json/quotes.json', function(data) { 
+                      var entry = data.Quotes[Math.floor(Math.random()*data.Quotes.length)];
+                      //console.log(entry.quote);
+
+                        localStorage.setItem("storedQuote", entry.quote);
+                        localStorage.setItem("storedAuthor", entry.author);
+                        $('.quote').html(localStorage.getItem("storedQuote")+'"<br> - '+ localStorage.getItem("storedAuthor"));
+                      //do the same exact thing with entry
+                    })
+
+                }
+            }
+
+            if(!(localStorage.getItem("storedQuote") === null))
+                $('.quote').html(localStorage.getItem("storedQuote")+'"<br> - '+ localStorage.getItem("storedAuthor"));
+        },
+
+        //Inspirational Quote old
+/*        inspirationalQuote: function(){
             $.get('http://www.quotesdaddy.com/feed/tagged/Inspirational', function(d){
                 $(d).find('item').each(function(){
          
@@ -432,7 +464,8 @@ var chromeNewTab = {
                     //console.log(india);
                 });
             });
-        },
+        },*/
+
 
         //Weather toggle
         weatherToggle: function(){
@@ -500,12 +533,13 @@ var chromeNewTab = {
                 // now = ((now.getHours()<10?'0':'') + now.getHours())+':'+((now.getMinutes()<10?'0':'') + now.getMinutes())+':'+((now.getSeconds()<10?'0':'') + now.getSeconds());
                 // now = ((hour<10?'0':'') + hour)+':'+((now.getMinutes()<10?'0':'') + now.getMinutes())+':'+((now.getSeconds()<10?'0':'') + now.getSeconds());
                 time = ((hour<10?'0':'') + hour)+':'+((now.getMinutes()<10?'0':'') + now.getMinutes()+'<sup>'+ampm+'</sup>');
+                //time = ((hour<10?'0':'') + hour)+':'+((now.getMinutes()<10?'0':'') + now.getMinutes());
 
                 
                 $('#dateTime .time').html(time);
 
                 //var d = new Date();
-                var weekday = new Array(7);
+/*                var weekday = new Array(7);
                 weekday[0] = "Sunday";
                 weekday[1] = "Monday";
                 weekday[2] = "Tuesday";
@@ -534,7 +568,7 @@ var chromeNewTab = {
                 $('#dateTime .date').html('<span>'+day+", "+date+" "+month+"</span>");
                 var dateTimeWidth = $('#dateTime').width()/2;
                 //console.log(dateTimeWidth);
-                $('#dateTime').css({'margin-left': -dateTimeWidth})
+                $('#dateTime').css({'margin-left': -dateTimeWidth});*/
             }  
         },     
 
@@ -553,7 +587,10 @@ var chromeNewTab = {
         changeBackground: function(){
             var todayDate = new Date();
             todayDate = todayDate.getDate();
-
+            if((localStorage.getItem("storedDate") === null)){
+                localStorage.setItem("storedImgNum", 2);    
+            }
+            console.log(localStorage.getItem("storedImgNum"));
             $('.imageWrapper').css({
                 background:'url(images/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
                 '-webkit-filter': 'blur(5px)',
@@ -571,7 +608,7 @@ var chromeNewTab = {
                         imageNumber();    
                     }else{
                         $('.imageWrapper').css({
-                            background:'url(images/'+newImg+'.jpg) center center',
+                            background:'url(images/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
                             '-webkit-filter': 'blur(5px)',
                             backgroundSize: 'cover'
                         });
@@ -585,7 +622,10 @@ var chromeNewTab = {
                         });*/
                         //console.log('hi');
                         localStorage.setItem("storedDate", todayDate);
-                        localStorage.setItem("storedImgNum", newImg);
+                        if(!(localStorage.getItem("storedImgNumTomorrow") === null)){
+                            localStorage.setItem("storedImgNum", localStorage.getItem("storedImgNumTomorrow"));    
+                        }
+                        localStorage.setItem("storedImgNumTomorrow", newImg);
                     }
 
                 }
@@ -599,7 +639,7 @@ var chromeNewTab = {
                 });
                 $('.imageWrapper').addClass('animateBlur');
             });
-
+            $('.tomHiddienImg').attr('src', 'https://s3-us-west-2.amazonaws.com/chrometab/'+localStorage.getItem("storedImgNumTomorrow")+'.jpg')
         }
 
         //Background
