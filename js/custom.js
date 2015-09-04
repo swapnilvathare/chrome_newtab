@@ -9,26 +9,10 @@ var chromeNewTab = {
         this.sections.googleSearch();
         this.sections.mainMenu();
         this.sections.weatherToggle();
-
     },
 
 
     sections: {
-        //font
-/*        latoFont: function(){
-            WebFontConfig = {
-                google: { families: [ 'Lato::latin' ] }
-              };
-              (function() {
-                var wf = document.createElement('script');
-                wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-                  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-                wf.type = 'text/javascript';
-                wf.async = 'true';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(wf, s);
-              })(); 
-          },*/
 
         //Weather
         getCurrentWeather: function(){
@@ -145,42 +129,7 @@ var chromeNewTab = {
                     },
                     error: function () {}
                 });
-                
-
             }
-            var doingStuff = false;
-            function cricketScore(){
-                //console.log('clean');
-                //$('#perspective .container .score').html('');
-                $.get('http://static.cricinfo.com/rss/livescores.xml', function(d){
-                    $(d).find('item').each(function(i){
-             
-                        var $book = $(this); 
-                        var description = '<div>'+ $book.find('description').text() + '</div>';
-                        //var devideTeam = description.split(' v ');
-                        if( !(description.indexOf('Sri Lanka') === -1)|| !(description.indexOf('South Africa') === -1) || !(description.indexOf('Bangladesh') === -1) || !(description.indexOf('India') === -1) || !(description.indexOf('Australia') === -1) || !(description.indexOf('Pakistan') === -1) || !(description.indexOf('New Zealand') === -1) || !(description.indexOf('West Indies') === -1)){
-                            if(description.indexOf('Rest of India') === -1 && description.indexOf('Sri Lanka Army Sports Club') === -1 && description.indexOf('Sri Lanka Ports Authority') === -1){
-                            //var score = '<div class="score"> ' + description + '</div>' ;
-                                $('#perspective .container .score .score'+ i).html(description);
-                                scoreAvailable = 1;
-                            }
-                        }
-                        //console.log(india);
-                    });
-
-                    if(scoreAvailable === 1){
-                        setTimeout(function(){
-                            cricketScore();
-                            //console.log('hi');
-                        },3000)
-                    }
-                });
-            }
-
-            /*function updateScore(){
-                setInterval(function(){cricketScore()}, 1000);
-            }*/
-
         },
 
         //Inspirational Quote
@@ -214,28 +163,6 @@ var chromeNewTab = {
             if(!(localStorage.getItem("storedQuote") === null))
                 $('.quote').html(localStorage.getItem("storedQuote")+'"<br> - '+ localStorage.getItem("storedAuthor"));
         },
-
-        //Inspirational Quote old
-/*        inspirationalQuote: function(){
-            $.get('http://www.quotesdaddy.com/feed/tagged/Inspirational', function(d){
-                $(d).find('item').each(function(){
-         
-                    var $quote = $(this); 
-                    var description = $quote.find('description').text();
-                    var devide = description.split('" -')
-                    var quote = devide[0];
-                    var author = devide[1];
-                    //console.log(quote);
-                    //console.log(author);
-                    //if(!(description.indexOf('India') === -1)){
-                        //var score = '<div class="score"> ' + description + '</div>' ;
-                        $('.quote').html(quote+'"<br> - '+ author);
-                    //}
-                    //console.log(india);
-                });
-            });
-        },*/
-
 
         //Weather toggle
         weatherToggle: function(){
@@ -309,36 +236,7 @@ var chromeNewTab = {
                 $('#dateTime .time').html(time);
 
                 //var d = new Date();
-/*                var weekday = new Array(7);
-                weekday[0] = "Sunday";
-                weekday[1] = "Monday";
-                weekday[2] = "Tuesday";
-                weekday[3] = "Wednesday";
-                weekday[4] = "Thursday";
-                weekday[5] = "Friday";
-                weekday[6] = "Saturday";
-                var day = weekday[now.getDay()];
 
-                var month = new Array();
-                month[0] = "January";
-                month[1] = "February";
-                month[2] = "March";
-                month[3] = "April";
-                month[4] = "May";
-                month[5] = "June";
-                month[6] = "July";
-                month[7] = "August";
-                month[8] = "September";
-                month[9] = "October";
-                month[10] = "November";
-                month[11] = "December";
-                var month = month[now.getMonth()];
-                var date = now.getDate();
-                //console.log(day+" "+month);
-                $('#dateTime .date').html('<span>'+day+", "+date+" "+month+"</span>");
-                var dateTimeWidth = $('#dateTime').width()/2;
-                //console.log(dateTimeWidth);
-                $('#dateTime').css({'margin-left': -dateTimeWidth});*/
             }  
         },     
 
@@ -411,43 +309,6 @@ var chromeNewTab = {
             });
             $('.tomHiddienImg').attr('src', 'https://s3-us-west-2.amazonaws.com/chrometab/'+localStorage.getItem("storedImgNumTomorrow")+'.jpg')
         }
-
-        //Background
-        /*changeBackground: function(){
-            var todayDate = new Date();
-            todayDate = todayDate.getDate();
-
-            $('.container').css({
-                background:'url(https://s3-us-west-2.amazonaws.com/chrometab/'+localStorage.getItem("storedImgNum")+'.jpg) center center',
-                backgroundSize: 'cover'
-            });
-
-            if((!(todayDate == localStorage.getItem("storedDate")))||(typeof localStorage.getItem("storedDate") === 'undefined')||(localStorage.getItem("storedDate") === null)){
-                
-                imageNumber();
-                function imageNumber(){
-                    var newImg = Math.floor((Math.random() * 53) + 1);
-                    //console.log('hi'+newImg);
-                    if(newImg == localStorage.getItem("storedImgNum")){
-                        //console.log('calling again');
-                        imageNumber();    
-                    }else{
-                        $('<img/>').attr('src', 'https://s3-us-west-2.amazonaws.com/chrometab/'+newImg+'.jpg').load(function() {
-                           $(this).remove(); // prevent memory leaks as @benweet suggested
-                            $('.container').css({
-                                background:'url(https://s3-us-west-2.amazonaws.com/chrometab/'+newImg+'.jpg) center center',
-                                backgroundSize: 'cover'
-                            });
-                        });
-                        //console.log('hi');
-                        localStorage.setItem("storedDate", todayDate);
-                        localStorage.setItem("storedImgNum", newImg);
-                    }
-
-                }
-            }
-
-        }*/
     }
 }
 
@@ -461,12 +322,6 @@ $(window).load(function(){
     });*/
 })
 $(document).ready(function () {
-
-
-    /*$('.perspective').css({
-        opacity:0
-    });*/
-    //$(".searchField").focus();
     chromeNewTab.init();
     
     $( "#showMenu" ).hover(
