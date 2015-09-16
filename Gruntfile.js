@@ -6,13 +6,24 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 src: [
-                    'js/libs/jquery.min.js',
+                    /*'js/libs/jquery.min.js',
                     'js/libs/modernizr.custom.25376.js',
                     'js/libs/classie.js',
                     'js/libs/menu.js',
                     'js/libs/jquery-ui.min.js',
                     'js/libs/jquery.googleSuggest.js',
-                    'js/custom.js'
+                    'js/custom.js'*/
+                    'js/libs/jquery.min.js',
+                    'js/libs/jquery-ui.min.js',
+                    'js/libs/jquery.googleSuggest.js',
+                    'js/time.js',
+                    'js/quote.js',
+                    'js/google.search.js',
+                    'js/ajax.call.js',
+                    'js/ajax.links.js',
+                    'js/local.storage.js',
+                    'js/weather.js',
+                    'js/background.js'
                 ],
                 dest: 'js/build/production.js',
                 nonull: true
